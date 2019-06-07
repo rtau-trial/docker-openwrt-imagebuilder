@@ -1,1 +1,2 @@
-# docker-openwrt-imagebuilder
+# OpenWrt Image Builder Docker image
+
