@@ -21,9 +21,10 @@ RUN apt-get update \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
-ARG OPENWRT_RELEASE=18.06.2
+ARG OPENWRT_RELEASE=17.01.0
 ARG OPENWRT_TARGET=x86
 ARG OPENWRT_SUBTARGET=64
+ARG OPENWRT_FILENAME=lede-imagebuilder-${OPENWRT_RELEASE}-${OPENWRT_TARGET}-${OPENWRT_SUBTARGET}.Linux-x86_64
 ARG OPENWRT_BASEDIR=/opt/openwrt/
 
 RUN useradd -u 10000 openwrt \
@@ -33,9 +34,9 @@ RUN useradd -u 10000 openwrt \
 USER openwrt
 
 WORKDIR ${OPENWRT_BASEDIR}
-RUN wget -q -O- https://downloads.openwrt.org/releases/"${OPENWRT_RELEASE}/targets/${OPENWRT_TARGET}/${OPENWRT_SUBTARGET}/openwrt-imagebuilder-${OPENWRT_RELEASE}-${OPENWRT_TARGET}-${OPENWRT_SUBTARGET}.Linux-x86_64.tar.xz" | tar -Jxf-
+RUN wget -q -O- https://downloads.openwrt.org/releases/"${OPENWRT_RELEASE}/targets/${OPENWRT_TARGET}/${OPENWRT_SUBTARGET}/${OPENWRT_FILENAME}.tar.xz" | tar -Jxf-
 
-WORKDIR "${OPENWRT_BASEDIR}/openwrt-imagebuilder-${OPENWRT_RELEASE}-${OPENWRT_TARGET}-${OPENWRT_SUBTARGET}.Linux-x86_64/"
+WORKDIR "${OPENWRT_BASEDIR}/${OPENWRT_FILENAME}/"
 
 # Cache the downloaded packages to install by default
 RUN make image \
