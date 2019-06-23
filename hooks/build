@@ -7,13 +7,14 @@ script_dir="$( dirname "${0}" )"
 
 source "${script_dir}/../config/targets.sh"
 source "${script_dir}/../config/release.sh"
+source "${script_dir}/../config/functions.sh"
 
 for target in "${targets}"
 do
 	sub_target_list="subtarget_${target}"
 	for sub_target in ${!sub_target_list}
 	do
-		image_name="${IMAGE_NAME}_${target}_${sub_target}"
+		image_name="$( get_docker_image_tag "${IMAGE_NAME}" "${target}" "${sub_target}" )"
 
 		docker build \
 			--build-arg "OPENWRT_RELEASE=${release}" \
