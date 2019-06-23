@@ -1,0 +1,22 @@
+#!/bin/bash
+set -o errexit
+set -o nounset
+set -o xtrace
+
+script_dir="$( dirname "${0}" )"
+
+source "${script_dir}/../config/targets.sh"
+source "${script_dir}/../config/release.sh"
+
+for target in "${targets}"
+do
+	sub_target_list="subtarget_${target}"
+	for sub_target in ${!sub_target_list}
+	do
+		docker build \
+			--build-arg "OPENWRT_RELEASE=${release}" \
+			--build-arg "OPENWRT_TARGET=${target}" \
+			--build-arg "OPENWRT_SUBTARGET=${sub_target}" \
+			--tag "${IMAGE_NAME}" --file "${DOCKERFILE_PATH}" .
+	done
+done
