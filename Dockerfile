@@ -33,7 +33,6 @@ RUN useradd -u 10000 openwrt \
    "${OPENWRT_BASEDIR}builder_tmp" \
  && chown -R 10000 "${OPENWRT_BASEDIR}"
 
-USER openwrt
 VOLUME "${OPENWRT_BASEDIR}builder_bin" "${OPENWRT_BASEDIR}builder_tmp" 
 
 WORKDIR ${OPENWRT_BASEDIR}
