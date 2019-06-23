@@ -28,10 +28,13 @@ ARG OPENWRT_FILENAME=openwrt-imagebuilder-${OPENWRT_RELEASE}-${OPENWRT_TARGET}-$
 ARG OPENWRT_BASEDIR=/opt/openwrt/
 
 RUN useradd -u 10000 openwrt \
- && mkdir "${OPENWRT_BASEDIR}" \
- && chown 10000 "${OPENWRT_BASEDIR}"
+ && mkdir -p \
+   "${OPENWRT_BASEDIR}builder_bin" \
+   "${OPENWRT_BASEDIR}builder_tmp" \
+ && chown -R 10000 "${OPENWRT_BASEDIR}"
 
 USER openwrt
+VOLUME "${OPENWRT_BASEDIR}builder_bin" "${OPENWRT_BASEDIR}builder_tmp" 
 
 WORKDIR ${OPENWRT_BASEDIR}
 RUN wget -q -O- https://downloads.openwrt.org/releases/"${OPENWRT_RELEASE}/targets/${OPENWRT_TARGET}/${OPENWRT_SUBTARGET}/${OPENWRT_FILENAME}.tar.xz" | tar -Jxf-
@@ -39,5 +42,6 @@ RUN wget -q -O- https://downloads.openwrt.org/releases/"${OPENWRT_RELEASE}/targe
 WORKDIR "${OPENWRT_BASEDIR}/${OPENWRT_FILENAME}/"
 
 # Cache the downloaded packages to install by default
-RUN make image \
- && rm -fR bin
+RUN ln -Ts "${OPENWRT_BASEDIR}/builder_bin" "${OPENWRT_BASEDIR}/${OPENWRT_FILENAME}/bin" \
+ && ln -Ts "${OPENWRT_BASEDIR}/builder_tmp" "${OPENWRT_BASEDIR}/${OPENWRT_FILENAME}/tmp" \
+ && make image
