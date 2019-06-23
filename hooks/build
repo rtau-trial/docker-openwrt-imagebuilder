@@ -13,10 +13,12 @@ do
 	sub_target_list="subtarget_${target}"
 	for sub_target in ${!sub_target_list}
 	do
+		image_name="${IMAGE_NAME}_${target}_${sub_target}"
+
 		docker build \
 			--build-arg "OPENWRT_RELEASE=${release}" \
 			--build-arg "OPENWRT_TARGET=${target}" \
 			--build-arg "OPENWRT_SUBTARGET=${sub_target}" \
-			--tag "${IMAGE_NAME}" --file "${DOCKERFILE_PATH}" .
+			--tag "${image_name}" --file "${DOCKERFILE_PATH}" .
 	done
 done
