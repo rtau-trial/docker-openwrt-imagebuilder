@@ -40,7 +40,8 @@ RUN wget --progress=bar:force -S -O- "https://downloads.openwrt.org/releases/${O
 WORKDIR "${OPENWRT_BASEDIR}/${OPENWRT_FILENAME}/"
 VOLUME "${OPENWRT_BASEDIR}/${OPENWRT_FILENAME}/build_dir"
 
-# Cache the downloaded packages to install by default
+## Cache the downloaded packages to install by default
 RUN ln -Ts "${OPENWRT_BASEDIR}/builder_bin" "${OPENWRT_BASEDIR}/${OPENWRT_FILENAME}/bin" \
  && ln -Ts "${OPENWRT_BASEDIR}/builder_tmp" "${OPENWRT_BASEDIR}/${OPENWRT_FILENAME}/tmp" \
- && make image
+# TODO: Find out how to cache the download package with less resource usage
+# && make image
