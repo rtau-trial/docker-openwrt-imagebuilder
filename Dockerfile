@@ -35,8 +35,7 @@ RUN useradd -u 10000 openwrt \
 
 VOLUME "${OPENWRT_BASEDIR}builder_bin" "${OPENWRT_BASEDIR}builder_tmp" 
 
-WORKDIR ${OPENWRT_BASEDIR}
-RUN wget -q -O- "https://downloads.openwrt.org/releases/${OPENWRT_RELEASE}/targets/${OPENWRT_TARGET}/${OPENWRT_SUBTARGET}/${OPENWRT_FILENAME}.tar.xz" | tar -Jxf-
+RUN wget --progress=bar:force -S -O- "https://downloads.openwrt.org/releases/${OPENWRT_RELEASE}/targets/${OPENWRT_TARGET}/${OPENWRT_SUBTARGET}/${OPENWRT_FILENAME}.tar.xz" | tar -Jxf- -C ${OPENWRT_BASEDIR}
 
 WORKDIR "${OPENWRT_BASEDIR}/${OPENWRT_FILENAME}/"
 
