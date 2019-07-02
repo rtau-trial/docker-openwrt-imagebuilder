@@ -38,6 +38,7 @@ VOLUME "${OPENWRT_BASEDIR}builder_bin" "${OPENWRT_BASEDIR}builder_tmp"
 RUN wget --progress=bar:force -S -O- "https://downloads.openwrt.org/releases/${OPENWRT_RELEASE}/targets/${OPENWRT_TARGET}/${OPENWRT_SUBTARGET}/${OPENWRT_FILENAME}.tar.xz" | tar -Jxf- -C ${OPENWRT_BASEDIR}
 
 WORKDIR "${OPENWRT_BASEDIR}/${OPENWRT_FILENAME}/"
+VOLUME "${OPENWRT_BASEDIR}/${OPENWRT_FILENAME}/build_dir"
 
 # Cache the downloaded packages to install by default
 RUN ln -Ts "${OPENWRT_BASEDIR}/builder_bin" "${OPENWRT_BASEDIR}/${OPENWRT_FILENAME}/bin" \
