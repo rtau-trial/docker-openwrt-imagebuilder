@@ -14,10 +14,11 @@ do
 	sub_target_list="subtarget_${target}"
 	for sub_target in ${!sub_target_list}
 	do
-		image_name="$( get_docker_image_tag "${IMAGE_NAME}" "${target}" "${sub_target}" )"
+		image_name="$( get_docker_image_tag "${IMAGE_NAME}" "${target}" "${sub_target}" )" 
+                cache_image_name="$( get_docker_image_tag "${DOCKER_REPO}:${CACHE_TAG}" "${target}" "${sub_target}" )"
 
-		echo "Pulling previously built cache: ${image_name}"
-		docker image pull "${image_name}"
+		echo "Pulling previously built cache: ${cache_image_name}"
+		docker image pull "${cache_image_name}" || true
 
 		docker build \
 			--build-arg "OPENWRT_RELEASE=${release}" \
