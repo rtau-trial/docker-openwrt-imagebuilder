@@ -5,10 +5,6 @@ set -o xtrace
 
 script_dir="$( dirname "${0}" )"
 
-echo "#### Exising environment variables"
-printenv
-echo "#### Exising environment variables-END"
-
 source "${script_dir}/../config/targets.sh"
 source "${script_dir}/../config/release.sh"
 source "${script_dir}/../config/functions.sh"
