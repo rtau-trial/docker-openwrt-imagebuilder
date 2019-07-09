@@ -16,10 +16,13 @@ do
 	do
 		image_name="$( get_docker_image_tag "${IMAGE_NAME}" "${target}" "${sub_target}" )"
 
+		echo "Pulling previously built cache: ${image_name}"
+		docker image pull "${image_name}"
+
 		docker build \
 			--build-arg "OPENWRT_RELEASE=${release}" \
-			--build-arg "OPENWRT_TARGET=${target}" \
 			--build-arg "OPENWRT_SUBTARGET=${sub_target}" \
+			--build-arg "OPENWRT_TARGET=${target}" \
 			--tag "${image_name}" --file "${DOCKERFILE_PATH}" .
 	done
 done
