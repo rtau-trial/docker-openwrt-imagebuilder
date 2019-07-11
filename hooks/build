@@ -21,6 +21,7 @@ do
 		docker image pull "${cache_image_name}" || true
 
 		docker build \
+                        --cache-from "${cache_image_name}" \
 			--build-arg "OPENWRT_RELEASE=${release}" \
 			--build-arg "OPENWRT_SUBTARGET=${sub_target}" \
 			--build-arg "OPENWRT_TARGET=${target}" \
