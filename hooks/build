@@ -24,8 +24,6 @@ do
 			--build-arg "OPENWRT_RELEASE=${release}" \
 			--build-arg "OPENWRT_SUBTARGET=${sub_target}" \
 			--build-arg "OPENWRT_TARGET=${target}" \
-			--tag "${image_name}" --file "${DOCKERFILE_PATH}" . \
-                        &
+			--tag "${image_name}" --file "${DOCKERFILE_PATH}" .
 	done
-        wait
 done
