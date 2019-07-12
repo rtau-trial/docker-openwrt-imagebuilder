@@ -1,2 +1,2 @@
 #!/bin/bash
-release=17.01.0
+release=18.06.4
