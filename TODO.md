@@ -1,7 +1,7 @@
 2. Customize the Docker Hub autobuild process
 	1. Build different targets for a single release
 	2. Tag them with different image tag
-		tag format: :<openwrt release>-<build_no>+<target>
+		tag format: :<openwrt release>-<build_no>_<target>
 		e.g. v17.01.0-1+x86-64
 
 # Done
