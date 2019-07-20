@@ -45,3 +45,10 @@ RUN ln -Ts "${OPENWRT_BASEDIR}/builder_bin" "${OPENWRT_BASEDIR}/${OPENWRT_FILENA
  && ln -Ts "${OPENWRT_BASEDIR}/builder_tmp" "${OPENWRT_BASEDIR}/${OPENWRT_FILENAME}/tmp" \
 # TODO: Find out how to cache the download package with less resource usage
 # && make image
+
+ARG VCS_REF=Unknown
+LABEL 	org.label-schema.vcs-ref=${VCS_REF} \
+	org.label-schema.vcs-url="https://github.com/rtau-trial/docker-openwrt-imagebuilder" \
+	org.opencontainers.image.revision=${VCS_REF} \
+	org.opencontainers.image.source="https://github.com/rtau-trial/docker-openwrt-imagebuilder"
+

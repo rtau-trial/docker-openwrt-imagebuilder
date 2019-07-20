@@ -28,6 +28,7 @@ do
 			--build-arg "OPENWRT_RELEASE=${release}" \
 			--build-arg "OPENWRT_SUBTARGET=${sub_target}" \
 			--build-arg "OPENWRT_TARGET=${target}" \
+			--build-arg "VCS_REF=${SOURCE_COMMIT}" \
 			--tag "${image_name}" --file "${DOCKERFILE_PATH}" .
 	done
 done
