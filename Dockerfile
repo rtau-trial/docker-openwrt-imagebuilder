@@ -21,7 +21,7 @@ RUN apt-get update \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
-ARG OPENWRT_RELEASE=17.01.0
+ARG OPENWRT_RELEASE=17.01.6
 ARG OPENWRT_TARGET=x86
 ARG OPENWRT_SUBTARGET=64
 ARG OPENWRT_BASEDIR=/opt/openwrt/
